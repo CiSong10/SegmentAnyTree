@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONTAINER_NAME="test_e2e_instance"
-IMAGE_NAME="nibio/e2e-instance"
+IMAGE_NAME="cisong/e2e-instance"
 
 # Check if the container exists
 if [ $(docker container ls -a -q -f name=$CONTAINER_NAME) ]; then
@@ -27,8 +27,8 @@ echo "Running the container"
 
 docker run -it --gpus all \
     --name $CONTAINER_NAME \
-    --mount type=bind,source=/home/cisong/SegmentAnyTree/bucket_in_folder,target=/home/nibio/mutable-outside-world/bucket_in_folder \
-    --mount type=bind,source=/home/cisong/SegmentAnyTree/bucket_out_folder,target=/home/nibio/mutable-outside-world/bucket_out_folder \
+    --mount type=bind,source=/home/cisong/SegmentAnyTree/bucket_in_folder,target=/home/cisong/bucket_in_folder \
+    --mount type=bind,source=/home/cisong/SegmentAnyTree/bucket_out_folder,target=/home/cisong/bucket_out_folder \
     $IMAGE_NAME 
 
 

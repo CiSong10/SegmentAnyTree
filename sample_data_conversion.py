@@ -164,7 +164,7 @@ if __name__ == '__main__':
     #las_to_ply('/local/home/vfrawa/Documents/data/NIBIO2/plot16_annotated.las', '/local/home/vfrawa/Documents/data/NIBIO2/plot16_annotated_noground_nolowveg_nooutp.ply', True, True, True)
 
     #TO ADAPT: path to las data folder (data from the different regions (CULS, etc.) and data_split_metadata.csv must be in this folder)
-    las_data_basepath = Path('/local/home/vfrawa/Documents/data')
+    las_data_basepath = Path('/home/cisong/las_data')
     train_test_split_path = str(las_data_basepath) + '/data_split_metadata.csv'
     rel_path_list, forest_region_list, split_list = train_val_test_split(train_test_split_path) #creates train-val-test split from train-test split
     #TO ADAPT: path where the code folder "OutdoorPanopticSeg_V2" is located
