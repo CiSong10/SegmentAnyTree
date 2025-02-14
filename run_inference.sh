@@ -6,6 +6,10 @@ SOURCE_DIR="$1"
 DEST_DIR="$2"
 CLEAN_OUTPUT_DIR="$3"
 
+# Set the script directory and add it to the PYTHONPATH
+SCRIPT_DIR=$(dirname "${0}")
+export PYTHONPATH="$SCRIPT_DIR:$PYTHONPATH"
+
 # Set default values if not provided
 : "${SOURCE_DIR:=/home/nibio/mutable-outside-world/data_for_test}"
 : "${DEST_DIR:=/home/nibio/mutable-outside-world/data_for_test_results}"
@@ -31,9 +35,6 @@ if [[ "$DEST_DIR" != /* ]]; then
     DEST_DIR=$(pwd)/"$DEST_DIR"
 fi
 
-# Set the script directory and add it to the PYTHONPATH
-SCRIPT_DIR="/home/nibio/mutable-outside-world"
-export PYTHONPATH="$SCRIPT_DIR:$PYTHONPATH"
 
 # Print the input and output directories
 echo "Input directory: $SOURCE_DIR"
@@ -55,9 +56,6 @@ python3 "$SCRIPT_DIR/nibio_inference/pipeline_utm2local_parallel.py" -i "$DEST_D
 # Update the eval.yaml file with the correct paths
 cp "$SCRIPT_DIR/conf/eval.yaml" "$DEST_DIR"
 python3 "$SCRIPT_DIR/nibio_inference/modify_eval.py" "$DEST_DIR/eval.yaml" "$DEST_DIR/utm2local" "$DEST_DIR"
-
-# clear cache
-python3 "$SCRIPT_DIR/nibio_inference/clear_cache.py" --eval_yaml "$DEST_DIR/eval.yaml"
 
 # Run the inference script with the config file
 python3 eval.py --config-name "$DEST_DIR/eval.yaml"

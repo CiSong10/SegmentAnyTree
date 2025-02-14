@@ -23,6 +23,7 @@ def modify_yaml(file_path, new_fold, output_dir_path=None):
 
     # Update the fold field
     data['data']['fold'] = list(new_fold)
+    data['data']['dataroot'] = os.path.join(output_dir_path, 'temp')
 
     # Update the output_dir field
     if output_dir_path:
